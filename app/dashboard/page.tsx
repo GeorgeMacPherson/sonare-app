@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
+import LogoutButton from "@/app/components/LogoutButton";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -20,6 +21,7 @@ export default async function DashboardPage() {
 
   return (
     <main style={{ padding: 24 }}>
+      <LogoutButton />
       <h1>{membership.studio.name}</h1>
       <p>You are inside your studio 🎹</p>
     </main>
