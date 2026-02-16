@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum StudioRole {
+  OWNER
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+model UserProfile {
+  id        String   @id // matches Supabase auth user id
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  memberships StudioMember[]
+}
+
+model Studio {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members StudioMember[]
+}
+
+model StudioMember {
+  id        String     @id @default(cuid())
+  studioId  String
+  userId    String
+  role      StudioRole
+  createdAt DateTime   @default(now())
+
+  studio Studio      @relation(fields: [studioId], references: [id])
+  user   UserProfile @relation(fields: [userId], references: [id])
+
+  @@unique([studioId, userId])
+}
