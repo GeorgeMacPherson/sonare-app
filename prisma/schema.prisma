@@ -45,3 +45,19 @@ model StudioMember {
 
   @@unique([studioId, userId])
 }
+
+model Assignment {
+  id         String   @id @default(cuid())
+  title      String
+  description String?
+  dueDate    DateTime?
+  studioId   String
+  studentId  String
+  createdAt  DateTime @default(now())
+
+  studio Studio @relation(fields: [studioId], references: [id])
+  student UserProfile @relation(fields: [studentId], references: [id])
+
+  @@index([studioId])
+  @@index([studentId])
+}

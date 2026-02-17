@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import LogoutButton from "@/app/components/LogoutButton";
+import StudentsList from "@/app/components/StudentsList";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -30,6 +31,10 @@ export default async function DashboardPage() {
         <div className="card">
           <h2 className="text-lg font-semibold">Welcome back 👋</h2>
           <p className="muted mt-2">You are inside your studio 🎹 — here's your workspace.</p>
+
+          <div className="mt-6">
+            <StudentsList studioId={membership.studio.id} />
+          </div>
         </div>
       </div>
     </main>
