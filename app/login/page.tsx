@@ -40,30 +40,52 @@ export default function LoginPage() {
   }
 
   return (
-    <main style={{ maxWidth: 420, margin: "40px auto", padding: 16 }}>
-      <h1>Sonare Login</h1>
+    <main className="min-h-screen flex items-center justify-center p-6">
+      <div className="w-full max-w-md stripe-top card">
+        <div className="mb-6">
+          <h1 className="text-2xl font-extrabold">Sonare Login</h1>
+          <p className="text-sm muted">Studio management for music teachers</p>
+        </div>
 
-      <form style={{ display: "grid", gap: 12 }}>
-        <input
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
-        />
-        <input
-          placeholder="password (for password mode)"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          autoComplete="current-password"
-        />
+        <form className="grid gap-4" onSubmit={signIn}>
+          <input
+            className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[rgba(99,102,241,0.18)] outline-none"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
+          />
 
-        <button onClick={signIn} type="submit">Sign in (password)</button>
-        <button onClick={signUp} type="button">Sign up (password)</button>
-        <button onClick={magicLink} type="button">Send magic link</button>
+          <input
+            className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[rgba(99,102,241,0.18)] outline-none"
+            placeholder="password (for password mode)"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            autoComplete="current-password"
+          />
 
-        {status && <p>{status}</p>}
-      </form>
+          <div className="flex flex-col gap-3">
+            <button className="btn-primary" type="submit">Sign in (password)</button>
+            <button
+              className="w-full text-sm py-2 rounded-lg border border-gray-200"
+              onClick={signUp}
+              type="button"
+            >
+              Sign up (password)
+            </button>
+            <button
+              className="w-full text-sm py-2 rounded-lg border border-gray-200"
+              onClick={magicLink}
+              type="button"
+            >
+              Send magic link
+            </button>
+          </div>
+
+          {status && <p className="text-sm muted">{status}</p>}
+        </form>
+      </div>
     </main>
   );
 }

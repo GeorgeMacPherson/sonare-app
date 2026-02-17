@@ -20,10 +20,18 @@ export default async function DashboardPage() {
   if (!membership) redirect("/onboarding");
 
   return (
-    <main style={{ padding: 24 }}>
-      <LogoutButton />
-      <h1>{membership.studio.name}</h1>
-      <p>You are inside your studio 🎹</p>
+    <main className="min-h-screen p-8 flex items-start justify-center">
+      <div className="w-full max-w-4xl">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl font-extrabold">{membership.studio.name}</h1>
+          <LogoutButton />
+        </div>
+
+        <div className="card">
+          <h2 className="text-lg font-semibold">Welcome back 👋</h2>
+          <p className="muted mt-2">You are inside your studio 🎹 — here's your workspace.</p>
+        </div>
+      </div>
     </main>
   );
 }
